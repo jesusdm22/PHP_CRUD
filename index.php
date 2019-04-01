@@ -29,7 +29,7 @@
 		</div>
 		<!--Fin Jombutron-->
 
-		<!--GRID-->
+		<!--ROW-->
 		<div class="row">
 			<!--Registrar un nuevo empleado-->
 			<div class="col-md-6">
@@ -110,9 +110,15 @@
 							<td>Programacion</td>
 						</tr>
 					</tbody>
-					</div>
+				</table>
 				</div>
-				<!--Fin GRID-->
 			</div>
-		</body>
-		</html>
+			<!--Fin ROW-->
+			<br><hr style="background-color:black;"><br>
+			<!--ROW2-->
+
+
+
+		</div>
+	</body>
+	</html>
