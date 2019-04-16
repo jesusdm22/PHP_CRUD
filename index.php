@@ -16,9 +16,25 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
-
+	<script>
+		function curtime() {
+			var today = new Date();
+			var h = today.getHours();
+			var m = today.getMinutes();
+			var s = today.getSeconds();
+			m = checkTime(m);
+			s = checkTime(s);
+			document.getElementById('hora').innerHTML =
+			h + ":" + m + ":" + s;
+			var t = setTimeout(curtime, 500);
+		}
+		function checkTime(i) {
+			if (i < 10) {i = "0" + i};
+			return i;
+		}
+	</script>
 </head>
-<body>
+<body onload="curtime()">
 	<div class="container">
 		<!--Jombutron-->
 		<div class="jumbotron jumbotron-fluid">
@@ -70,55 +86,39 @@
 					<input class="btn btn-danger" type="reset" value="Limpiar campos">
 				</form>
 			</div>
-			<!--Fin Registro de un nuevo empleado-->
-
-			<!--Listado de empleados-->
+			<!--Sus datos-->
 			<div class="col-md-6">
-				<h3 class="text-right">Lista de empleados</h3>
+				<span>Bienvenido, <i>administrador<i>.</span><br>
+				<span><b><span id="hora"></span></b></span>
+			</div>
+
+			</div>
+			<!--Fin ROW-->
+
+			<br><hr style="background-color:black;"><br>
+			<!--ROW2-->
+			<!--Listado de empleados-->
+			<div class="row">
+			<div class="col-md-12">
+				<h3 class="text-center">Lista de empleados</h3>
 				<table class="table">
 					<thead class="thead-dark">
 						<tr>
-							<th scope="col">#ID</th>
-							<th scope="col">Nombre</th>
-							<th scope="col">Sede asignada</th>
-							<th scope="col">Departamento</th>
+							<th scope="col" colspan="2">#ID</th>
+							<th scope="col" colspan="2">Nombre</th>
+							<th scope="col" colspan="2">Sede asignada</th>
+							<th scope="col" colspan="2">Departamento</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>AU</td>
-							<td>Taller</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Jhon</td>
-							<td>ES</td>
-							<td>Administracion</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Bill</td>
-							<td>PL</td>
-							<td>Taller</td>
-						</tr>
-						<tr>
-							<th scope="row">4</th>
-							<td>Tom</td>
-							<td>UK</td>
-							<td>Programacion</td>
-						</tr>
+						<?php
+							include("main.php");
+							GetFromDB();
+						?>
 					</tbody>
 				</table>
 				</div>
 			</div>
-			<!--Fin ROW-->
-			<br><hr style="background-color:black;"><br>
-			<!--ROW2-->
-
-
-
 		</div>
 	</body>
 	</html>

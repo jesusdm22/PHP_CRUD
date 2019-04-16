@@ -52,31 +52,39 @@ function  CatchFromForm() {
 //Funcion para recuperar los datos de la BBDD
 //funcion por hacer***********
 function GetFromDB() {
-	if(connect()){
-		echo "Conexión correcta!";
-	}
+	$conn = connect();
+
+	$sql = "SELECT id, nombre, sede, departamento FROM empleados";
+
+	//La ejecutamos y cazamos los datos
+	$ejecutar = $conn->query($sql);
+	while ($columna = $ejecutar->fetch_assoc()) {
+		echo "<tr>
+				<th scope='row'>" . $columna['id'] . "</th>" .
+				"<td colspan='2'>" . $columna['nombre'] . "<td>" .
+				"<td colspan='2'>" . $columna['sede'] . "<td>" .
+				"<td colspan='2'>" . $columna['departamento'] . "<td>" .
+			  "</tr>";
+	 }
 }
 
-function SetEmpleado()
 
-//----------------------------------------------------------------------
-//EJECUCIÓN DEL SCRIPT -------------------------------------------------
-//----------------------------------------------------------------------
+//Funcion para crear un empleado
+function SetEmpleado(){
+	//1º Paso
+	//Guardamos los datos del formulario en un array
+	$datos = CatchFromForm();
 
-//1º Paso
-//Guardamos los datos del formulario en un array
-$datos = CatchFromForm();
+	//Llamamos a la conexión
+	$conn = connect();
 
-//Llamamos a la conexión
-$conn = connect();
+	//Creamos la query
+	$sql = "INSERT INTO empleados (nombre, sede, departamento)
+	        VALUES ('$datos[0]', '$datos[1]', '$datos[2]')";
 
-//Creamos la query
-$sql = "INSERT INTO empleados (nombre, sede, departamento)
-        VALUES ('$datos[0]', '$datos[1]', '$datos[2]')";
-
-if (!mysqli_query($conn,$sql))
-	{
-	echo("Descripción del error:  " . mysqli_error($conn));
+	if (!mysqli_query($conn,$sql)) {
+		echo("Descripción del error:  " . mysqli_error($conn));
 	}
+}
 
 ?>
